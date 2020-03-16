@@ -23,8 +23,8 @@ app.get('/', (req, res)=>{
 app.post('/weather', (req, res)=>{
   const APIKEY = require('./sources/secrets.json').API_KEY;
   const cityName = req.body.cityName;
-  axios.get(`https://api.openweathermap.org/data/2.5/weather?APPID=${API_KEY}`)
-      .then(res => {
+  axios.get(`https://api.openweathermap.org/data/2.5/weather?APPID=${API_KEY}&q=${cityName}`)
+      .then(response => {
         res.render("index", {
           weatherText: `${cityName} : ${res.data.main.temp}°C`      
       })
@@ -33,6 +33,7 @@ app.post('/weather', (req, res)=>{
           weatherText: "City is not found!" 
         })
     })
+  })
 
     
 });

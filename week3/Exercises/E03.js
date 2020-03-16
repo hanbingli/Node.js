@@ -21,9 +21,9 @@ app.get('/', (req, res) => {
         'Content-Type': 'application/json'
     }
   })
-    .then(res => console.log(res))
+    .then(res => {return res.text()})
     .then(data => {
-      console.log(data);
+      res.send(data);
     })
     .catch(err => console.log('Error!'));
 });

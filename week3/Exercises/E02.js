@@ -10,10 +10,11 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-  fetch(api, { headers: { 'Authorization': 'Basic YWRtaW46aHZnWDhLbFZFYQ==' })
+  fetch(api, { headers: { 'Authorization': 'Basic YWRtaW46aHZnWDhLbFZFYQ==' }})
     .then(res => res.json())
     .then(data => {
       console.log(data);
+      res.send(data)
     })
     .catch(err => res.send('Error!'));
 });

@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
     .then(data => {
       console.log(data);
       console.log(data.value.joke)
+      res.send(data.value.joke)
       
     })
     .catch(err => res.send('Error!'));
