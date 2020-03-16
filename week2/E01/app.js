@@ -21,13 +21,15 @@ app.put('/blogs', (req, res) => {
 
     // shouldn't it be the opposite? When the post exists, remain the same; when it doesn't, write it in.
     if (fs.existsSync(req.body.title)) {
+        fs.writeFileSync(req.body.title, req.body.content);
+        res.end('New file');
       
-      console.log('data already exists')
-      res.end('Existing file')
+      
     }
     else {
-        fs.writeFileSync(req.body.title, req.body.content);
-      res.end('New file');
+        console.log('data already exists');
+        res.end('Existing file');
+        
     }
 });
 
@@ -40,6 +42,13 @@ app.delete('/blogs/:title', (req, res) => {
 
 app.get('/blogs/:title', (req, res) => {
     // How to get the tilte from the url parameters?
-    res.sendfile(req.params.title);
-    res.end('getV')
+    res.sendFile(req.params.title, {
+        root: __dirname,
+        headers: {
+            'Content-Type': 'text/plain'
+        }
+    });
+
 })
+
+
